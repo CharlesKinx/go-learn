@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"strconv"
+	"strings"
 )
 
 func main() {
@@ -37,4 +38,29 @@ func main() {
 		fmt.Println("转化失败")
 	}
 	fmt.Println(myi)
+}
+func isPalindrome(s string) bool {
+
+	var str = strings.ToLower(getStr(s))
+	var right = len(str)
+	var left = 0
+
+	for left < right {
+		if str[left] != str[right] {
+			return false
+		}
+		left++
+		right--
+	}
+	return true
+}
+
+func getStr(s string) string {
+	var ans = ""
+	for i := 0; i < len(s); i++ {
+		if (s[i] >= 'a' && s[i] <= 'z') || (s[i] >= 'A' && s[i] <= 'Z') || (s[i] >= '0' && s[i] <= '9') {
+			ans += string(s[i])
+		}
+	}
+	return ans
 }
