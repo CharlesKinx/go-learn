@@ -21,3 +21,46 @@ func main() {
 
 	fmt.Println(ERR1, ERR2, ERR3, ERR4)
 }
+
+func isSubsequence(s string, t string) bool {
+	len1 := len(s)
+	len2 := len(t)
+
+	if len1 > len2 {
+		return false
+	}
+	ind1 := 0
+	ind2 := 0
+
+	for ind1 < len1 && ind2 < len2 {
+		if s[ind1] == t[ind2] {
+			ind1++
+		}
+		ind2++
+	}
+
+	return ind1 == len1
+}
+
+func twoSum(numbers []int, target int) []int {
+
+	var res []int
+
+	left := 0
+	right := len(numbers) - 1
+
+	for left != right {
+		if numbers[left]+numbers[right] == target {
+			res = append(res, left+1, right+1)
+
+			break
+		} else if numbers[left]+numbers[right] < target {
+			left++
+		} else {
+			right++
+		}
+	}
+
+	return res
+
+}
