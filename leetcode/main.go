@@ -1,6 +1,9 @@
 package main
 
-import "sort"
+import (
+	"math"
+	"sort"
+)
 
 func main() {
 
@@ -60,4 +63,34 @@ func threeSum(nums []int) [][]int {
 
 	}
 	return res
+}
+
+/*
+*长度最小的子数组
+ */
+func minSubArrayLen(target int, nums []int) int {
+	var ans = math.MaxInt
+	var sum = 0
+	var left = 0
+	var right = 0
+	var size = len(nums)
+
+	for right < size {
+		sum += nums[right]
+
+		for left < right && sum-nums[left] >= target {
+			sum -= nums[left]
+			left++
+		}
+
+		if sum >= target {
+			ans = min(ans, right-left+1)
+		}
+		right++
+	}
+	if ans == math.MaxInt {
+		return 0
+	} else {
+		return ans
+	}
 }
