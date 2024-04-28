@@ -42,3 +42,4 @@ leetcode 刷题
 
 - [长度最小的子数组](https://leetcode.cn/problems/minimum-size-subarray-sum/)
 
+go语言的指针用法
