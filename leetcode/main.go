@@ -94,3 +94,30 @@ func minSubArrayLen(target int, nums []int) int {
 		return ans
 	}
 }
+
+/*
+*无重复字符的最长子串
+ */
+func lengthOfLongestSubstring(s string) int {
+
+	len := len(s)
+	left, right := 0, 0
+	var arr = [128]int{}
+	var ans = math.MinInt
+	for right < len {
+
+		for left < right && arr[s[right]] != 0 {
+			arr[s[left]] = 0
+			left++
+		}
+
+		ans = max(ans, right-left+1)
+		arr[s[right]] = 1
+		right++
+	}
+	if ans == math.MinInt {
+		return 0
+	} else {
+		return ans
+	}
+}
