@@ -121,3 +121,65 @@ func lengthOfLongestSubstring(s string) int {
 		return ans
 	}
 }
+
+/*
+*串联所有单词的子串
+ */
+func findSubstring(s string, words []string) []int {
+
+	len1 := len(s)
+	len2 := len(words)
+	len3 := len(words[0])
+
+	var ans = []int{}
+	var hashMap = make(map[string]int)
+
+	for i := 0; i < len2; i++ {
+		hashMap[words[i]]++
+	}
+
+	for i := 0; i < len3; i++ {
+
+		var temp = make(map[string]int)
+		for j := i; j+len3 <= len1; j += len3 {
+			cur := s[j : j+len3]
+			temp[cur]++
+
+			if j >= i+len2*len3 {
+				var index = j - len2*len3
+				prev := s[index : index+len3]
+
+				if temp[prev] == 1 {
+					delete(temp, prev)
+				} else {
+					temp[prev]--
+				}
+				if !mapsEqual(temp, hashMap) {
+					continue
+				}
+			}
+			if temp[cur] != hashMap[cur] {
+				continue
+			}
+
+			if mapsEqual(temp, hashMap) {
+				ans = append(ans, j-(len2-1)*len3)
+			}
+		}
+	}
+	return ans
+}
+
+func mapsEqual(a, b map[string]int) bool {
+
+	if len(a) != len(b) {
+		return false
+	}
+
+	for k, v := range a {
+		if _, ok := b[k]; !ok || v != b[k] {
+			return false
+		}
+	}
+	return true
+}
