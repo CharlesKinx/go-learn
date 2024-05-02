@@ -183,3 +183,58 @@ func mapsEqual(a, b map[string]int) bool {
 	}
 	return true
 }
+
+/*
+*最小覆盖子串
+ */
+func minWindow(s string, t string) string {
+
+	var lens = len(s)
+	var lent = len(t)
+
+	var left = 0
+	var ansLeft, ansRight = -1, lens
+
+	cnt1 := make([]int, 128)
+	cnt2 := make([]int, 128)
+
+	for i := 0; i < lent; i++ {
+		cnt1[t[i]]++
+	}
+	for i := 0; i < lens; i++ {
+		c := s[i]
+		cnt2[c]++
+
+		for isMatch(cnt1, cnt2) {
+			if i-left < ansRight-ansLeft {
+				ansRight = i
+				ansLeft = left
+			}
+
+			cnt2[s[left]]--
+			left++
+		}
+	}
+
+	if ansLeft < 0 {
+		return ""
+	} else {
+		return s[ansLeft : ansRight+1]
+	}
+}
+
+func isMatch(cnt1 []int, cnt2 []int) bool {
+
+	for i := 'A'; i <= 'Z'; i++ {
+		if cnt1[i] > cnt2[i] {
+			return false
+		}
+	}
+
+	for i := 'a'; i <= 'z'; i++ {
+		if cnt1[i] > cnt2[i] {
+			return false
+		}
+	}
+	return true
+}

@@ -60,9 +60,33 @@ LeetCode刷题
 
 [无重复字符的最长子串](https://leetcode.cn/problems/longest-substring-without-repeating-characters/)
 
+## 2024/4/30 Day5
+
+今天摆烂...没有学..
+
+## 2024/5/01 Day6
+
+突然发现....昨天写的没了...草！！！
+
+[串联所有单词的子串](https://leetcode.cn/problems/substring-with-concatenation-of-all-words/)
+
+go语言中没有用来比较两个hashmap是否相等，今天写了一个比较hashmap的函数
+
+```go
+func mapsEqual(a, b map[string]int) bool {
+	if len(a) != len(b) {
+		return false
+	}
+	for k, v := range a {
+		if _, ok := b[k]; !ok || v != b[k] {
+			return false
+		}
+	}
+	return true
+}
+```
 
 
-## 2024/5/01 Day5
 
 go modules
 
