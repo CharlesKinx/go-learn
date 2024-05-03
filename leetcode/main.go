@@ -238,3 +238,38 @@ func isMatch(cnt1 []int, cnt2 []int) bool {
 	}
 	return true
 }
+
+/*
+*有效的数独
+ */
+func isValidSudoku(board [][]byte) bool {
+
+	col := [9][10]int{}
+	row := [9][10]int{}
+	box := [9][10]int{}
+
+	for i := 0; i < 9; i++ {
+		for j := 0; j < 9; j++ {
+			if board[i][j] == '.' {
+				continue
+			}
+
+			var num = int8(board[i][j] - '0')
+			if col[i][num] != 0 {
+				return false
+			}
+			if row[j][num] != 0 {
+				return false
+			}
+
+			if box[j/3+(i/3)*3][num] != 0 {
+				return false
+			}
+			col[i][num] = 1
+			row[j][num] = 1
+			box[j/3+(i/3)*3][num] = 1
+
+		}
+	}
+	return true
+}
