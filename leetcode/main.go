@@ -273,3 +273,49 @@ func isValidSudoku(board [][]byte) bool {
 	}
 	return true
 }
+
+/*
+*生命游戏
+ */
+func gameOfLife(board [][]int) {
+
+	row := len(board)
+	col := len(board[0])
+	arr := make([][]int, row)
+	for i := 0; i < row; i++ {
+		arr[i] = make([]int, col)
+	}
+
+	xrr := [8]int{1, 1, 1, -1, -1, -1, 0, 0}
+	yrr := [8]int{1, 0, -1, 1, 0, -1, 1, -1}
+
+	for i := 0; i < row; i++ {
+		for j := 0; j < col; j++ {
+			cnt := 0
+			for k := 0; k < 8; k++ {
+				curx := i + xrr[k]
+				cury := j + yrr[k]
+
+				if curx < 0 || curx >= row || cury < 0 || cury >= col {
+					continue
+				}
+				if board[curx][cury] == 1 {
+					cnt++
+				}
+			}
+
+			if cnt < 2 || cnt > 3 || (cnt == 2 && board[i][j] == 0) {
+				arr[i][j] = 0
+			} else {
+				arr[i][j] = 1
+			}
+		}
+	}
+
+	for i := 0; i < row; i++ {
+		for j := 0; j < col; j++ {
+			board[i][j] = arr[i][j]
+		}
+	}
+
+}
