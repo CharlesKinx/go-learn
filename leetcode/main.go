@@ -3,6 +3,7 @@ package main
 import (
 	"math"
 	"sort"
+	"strings"
 )
 
 func main() {
@@ -317,5 +318,59 @@ func gameOfLife(board [][]int) {
 			board[i][j] = arr[i][j]
 		}
 	}
+}
 
+func wordPattern(pattern string, s string) bool {
+
+	str := strings.Split(s, " ")
+	if len(pattern) != len(str) {
+		return false
+	}
+
+	hashMap1 := map[byte]string{}
+	hashMap2 := map[string]byte{}
+
+	for i := 0; i < len(str); i++ {
+		if _, ok := hashMap1[pattern[i]]; !ok {
+			hashMap1[pattern[i]] = str[i]
+		} else {
+			if hashMap1[pattern[i]] != str[i] {
+				return false
+			}
+		}
+
+		if _, ok := hashMap2[str[i]]; !ok {
+			hashMap2[str[i]] = pattern[i]
+		} else {
+			if hashMap2[str[i]] != pattern[i] {
+				return false
+			}
+		}
+	}
+	return true
+}
+
+/*
+*有效的字母异位词
+ */
+func isAnagram(s string, t string) bool {
+
+	arr := [26]int{}
+
+	if len(s) != len(t) {
+		return false
+	}
+
+	for i := 0; i < len(s); i++ {
+		arr[s[i]-'a']++
+	}
+
+	for i := 0; i < len(t); i++ {
+		arr[t[i]-'a']--
+		if arr[t[i]-'a'] < 0 {
+			return false
+		}
+	}
+
+	return true
 }
