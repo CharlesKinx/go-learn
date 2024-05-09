@@ -374,3 +374,25 @@ func isAnagram(s string, t string) bool {
 
 	return true
 }
+
+/*
+*字母异位词分组
+ */
+func groupAnagrams(strs []string) [][]string {
+
+	hashMap := make(map[string][]string)
+	for _, str := range strs {
+		t := []byte(str)
+		sort.Slice(t, func(i, j int) bool { return t[i] < t[j] })
+
+		temp := string(t)
+		hashMap[temp] = append(hashMap[temp], str)
+	}
+
+	ans := make([][]string, 0)
+
+	for _, v := range hashMap {
+		ans = append(ans, v)
+	}
+	return ans
+}

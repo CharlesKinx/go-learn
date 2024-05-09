@@ -277,3 +277,17 @@ LeetCode题目：
 
 - [单词规律](https://leetcode.cn/problems/word-pattern/)
 - [有效的字母异位词](https://leetcode.cn/problems/valid-anagram/)
+
+## 2024/5/09 Day9
+
+LeetCode题目：
+
+- [字母异位词分组](https://leetcode.cn/problems/group-anagrams/)
+
+字符串排序：
+
+```go
+t := []byte(str) // 先将字符串转化为数组
+sort.Slice(t, func(i, j int) bool { return t[i] < t[j] }) 在进行排序
+```
+
